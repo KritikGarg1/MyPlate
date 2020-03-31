@@ -9,7 +9,7 @@ Widget cardView(BuildContext context, int itemIndex, List<TopRecipy> posts) {
   Color c2 = Color.fromRGBO(120, 155, 255, 100);
   if (itemIndex == 0)
     return SizedBox(
-      width: _width / 6,
+      width: _width / 9,
     );
   else
     return Padding(

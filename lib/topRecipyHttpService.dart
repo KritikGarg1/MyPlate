@@ -4,7 +4,7 @@ import 'topRecipies.dart';
 
 
 class HttpService {
-  final String recipyURL = "https://api.spoonacular.com/recipes/random?number=10&apiKey=03249204e9704510a430a5b79c039887";
+  final String recipyURL = "https://api.spoonacular.com/recipes/random?number=10&apiKey=89144fc6457f4a18a9f2d4e44e8883c5";
 
   Future<List<TopRecipy>> getRecipies() async {
 

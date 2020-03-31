@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'cardList.dart';
 import 'package:flutter/services.dart';
-import 'topRecipies.dart';
-import 'topRecipyHttpService.dart';
+import 'searchRecipe.dart';
 
 Color c1 = Color.fromRGBO(255, 175, 55, 100);
 Color c2 = Color.fromRGBO(120, 155, 255, 100);
@@ -33,57 +32,46 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
           body: ListView(
-              scrollDirection: Axis.vertical,
-              physics: ScrollPhysics(),
-              shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        children: <Widget>[
+          RecipySearchBar(),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 20, left: 60),
+            child: Row(
               children: <Widget>[
-            RecipySearchBar(),
-            SizedBox(
-              height: 20,
-            ),
-            Stack(
-              alignment: Alignment.topLeft,
-              children: <Widget>[
-                Opacity(
-                    opacity: 0.3,
-                    child: Container(
-                      decoration:
-                          BoxDecoration(color: c1, shape: BoxShape.circle),
-                      height: 280,
-                      width: 280,
-                    )),
-                Container(
-                  padding: EdgeInsets.only(top: 20, left: 60),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        "TOP RECIPES",
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.black54),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                          decoration:
-                              BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(220, 220, 220, 0.6)),
-                          child: IconButton(
-                              color: Colors.black54,
-                              icon: Icon(Icons.refresh),
-                              onPressed: () {
-                                setState(() {
-                                  x = 0;
-                                });
-                              }))
-                    ],
-                  ),
+                Text(
+                  "TOP RECIPES",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black54),
                 ),
-                RecipyListView(x)
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color.fromRGBO(220, 220, 220, 0.6)),
+                    child: IconButton(
+                        color: Colors.black54,
+                        icon: Icon(Icons.refresh),
+                        onPressed: () {
+                          setState(() {
+                            x = 0;
+                          });
+                        }))
               ],
-            )
-          ])),
+            ),
+          ),
+          RecipyListView(x)
+        ],
+      )),
     );
   }
 }
@@ -122,29 +110,37 @@ class RecipySearchBar extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.all(20),
-            child: Container(
-                width: 160,
-                height: 50,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: c1,
-                        blurRadius: 27.0, // soften the shadow
-                        spreadRadius: 1.0, //extend the shadow
-                        offset: Offset(
-                          2.0, // Move to right 10  horizontally
-                          2.0, // Move to bottom 10 Vertically
-                        ),
-                      )
-                    ],
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Center(
-                    child: Text(
-                  'Search',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ))),
-          )
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => searchRecipe()),
+                );
+              },
+              child: Container(
+                  width: 160,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: c1,
+                          blurRadius: 27.0, // soften the shadow
+                          spreadRadius: 1.0, //extend the shadow
+                          offset: Offset(
+                            2.0, // Move to right 10  horizontally
+                            2.0, // Move to bottom 10 Vertically
+                          ),
+                        )
+                      ],
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Center(
+                      child: Text(
+                    'Search',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ))),
+            ),
+          ),
         ]),
         Padding(
           padding: const EdgeInsets.only(left: 30, top: 22),
