@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'cardList.dart';
 import 'package:flutter/services.dart';
 import 'searchRecipe.dart';
+import 'searchRecipe.dart';
+import 'searchChangeNotifier.dart';
+import 'package:provider/provider.dart';
 
 Color c1 = Color.fromRGBO(255, 175, 55, 100);
 Color c2 = Color.fromRGBO(120, 155, 255, 100);
@@ -114,7 +117,12 @@ class RecipySearchBar extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => searchRecipe()),
+                  MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider<SearchState>(
+                      builder: (_) => SearchState(),
+                      child: searchRecipe(),
+                    ),
+                  ),
                 );
               },
               child: Container(

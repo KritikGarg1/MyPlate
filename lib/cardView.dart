@@ -53,6 +53,8 @@ Widget cardView(BuildContext context, int itemIndex, List<TopRecipy> posts) {
 }
 
 Widget getImage(BuildContext context, int itemIndex, List<TopRecipy> posts) {
+  double _width = MediaQuery.of(context).size.width;
+  double _height = MediaQuery.of(context).size.height;
   if (posts[itemIndex].imagesrc == null)
     return Container(
       width: 20,
@@ -62,5 +64,5 @@ Widget getImage(BuildContext context, int itemIndex, List<TopRecipy> posts) {
     return ClipRRect(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(25), topLeft: Radius.circular(25)),
-        child: Image.network(posts[itemIndex].imagesrc));
+        child: AspectRatio(aspectRatio: (_width/_height)*4,child: Image.network(posts[itemIndex].imagesrc,fit: BoxFit.fitWidth,)));
 }
